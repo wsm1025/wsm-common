@@ -1,21 +1,46 @@
-function wsm(a){
-    var lyric = a.split('\n');
-    var arr = new Array();
-    for (var x in lyric) {
-        arr.push({0:s(lyric[x]),1:m(lyric[x])})
+import { isNum, max, min } from "./util/index.js";
+function randomNumb(a, b, c = 100) {
+  try {
+    var num = isNum(a) || isNum(b) || isNum(a - 0) || isNum(b - 0);
+    if (!num) {
+      throw new Error("传入的参数为数字或者数字字符串");
     }
-    return  arr;
+    //防止小数部分过多
+    if (c > 20) {
+      c = 0;
+    }
+    const res = (Math.random() * (max(a, b) - min(a, b)) + min(a, b)).toFixed(
+      c
+    );
+    return res;
+  } catch {
+    throw new Error("传入参数错误");
+  }
 }
-
-function s(b){
-    b = b.substring(0, b.length);
-    b = b.substring(b.indexOf("[")+1,b.indexOf("]"))
-    return b;
+const localDB = {
+  isWindow: () => {
+    if (typeof window === 'undefined' ) {
+      throw new Error("请在浏览器下调用此方法");
+    }
+  },
+  set: (key, val) => {
+    localDB.isWindow();
+    return window.localStorage.setItem(key, val);
+  },
+  del: (key) => {
+    localDB.isWindow();
+    return window.localStorage.removeItem(key);
+  },
+  get: (key) => {
+    localDB.isWindow();
+    return window.localStorage.getItem(key);
+  },
+  clear: () => {
+    localDB.isWindow();
+    return window.localStorage.clear();
+  },
+};
+export {
+    randomNumb,
+    localDB
 }
-
-function m(c){
-    var index = c.lastIndexOf("\]");
-    c = c.substring(index + 1, c.length);
-    return c
-}
-export default wsm
