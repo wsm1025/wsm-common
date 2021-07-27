@@ -1,6 +1,6 @@
 {
   "name": "wsm-common",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This is WSM's public library",
   "main": "index.js",
   "type": "module",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/wsm1025/wsm-common/issues"
   },
-  "homepage": "https://github.com/wsm1025/wsm-common#readme"
+  "homepage": "https://github.com/wsm1025/wsm-common#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }
