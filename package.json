@@ -1,0 +1,23 @@
+{
+  "name": "wsm-common",
+  "version": "1.0.0",
+  "description": "This is WSM's public library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wsm1025/wsm-common.git"
+  },
+  "keywords": [
+    "public",
+    "util"
+  ],
+  "author": "wsm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wsm1025/wsm-common/issues"
+  },
+  "homepage": "https://github.com/wsm1025/wsm-common#readme"
+}
