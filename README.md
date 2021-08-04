@@ -10,3 +10,4 @@
 * CamelCase 连字符转驼峰
 * WAjax 同Axios
 * staticData 提供一个测试的静态数据(返回的是一个Promise)
+* authCode设生成一个验证码，返回这个实例以及字母结果，接受回调参数

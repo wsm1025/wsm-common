@@ -1,7 +1,7 @@
-import { isNum, max, min, Hexcolor } from "./util/index.js";
+import { isNum, max, min, Hexcolor, type } from "./util/index.js";
 import axios from "axios";
 
-const STATIC_DATA = 'http://v1.hitokoto.cn?c=a'; 
+const STATIC_DATA = "http://v1.hitokoto.cn?c=a";
 function randomNumb(a, b, c = 0) {
   try {
     var num = isNum(a) && isNum(b);
@@ -82,7 +82,7 @@ function CamelCase(str, separator = "-") {
   return b.join("");
 }
 const WAjax = axios;
-WAjax.defaults.timeout = 5000
+WAjax.defaults.timeout = 5000;
 //静态数据
 function staticData(val = STATIC_DATA) {
   return new Promise((success, fail) => {
@@ -99,6 +99,100 @@ function staticData(val = STATIC_DATA) {
       console.error("err:", err);
     });
 }
+function authCode(option,callback) {
+  let res = '';
+  try{
+    const DefaultOption = {
+      style: {
+        backgroundColor: "pink",
+      },
+      el: "body",
+      height:100,
+      width:200,
+      word:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789',
+      num:4,
+      textAlign:"center",
+      fillStyle:'purple',
+      strokeStyle:'#fff',
+      position:{
+        x:110,
+        y:60
+      },
+      font:"40px 楷体"
+    };
+    const idNum = randomNumb(100, 1000);
+    if(type(option)!=="[object Object]") throw new Error('第一个参数为对象')
+    const Option = option && {...DefaultOption,...option};
+    const canvas = document.createElement("canvas");
+    canvas.height = Option.height;
+    canvas.width = Option.width;
+    Object.entries(Option.style).forEach(ele => {
+      canvas.style[ele[0]] = ele[1]
+    });
+    canvas.id = `wsm-canvas-${idNum}`;
+    if(!document.querySelector(Option.el)) throw new Error('请选择有效节点')
+    document.querySelector(Option.el).appendChild(canvas);
+    var can = document.getElementById(`wsm-canvas-${idNum}`);
+    var Canvas = can.getContext("2d");
+    if(Option.word.length<4){
+      throw new Error("字母数量至少为5位")
+    }
+    function change() {
+      for (var i = 0; i < Option.num; i++) {
+        var num = Math.round(Math.random() * (Option.word.length - 1));
+        res += Option.word[num];
+      }
+      return res;
+    }
+
+    function random() {
+      return Math.round(Math.random() * 250);
+    }
+    can.onclick = function () {
+      //清除画布内容和结果
+      res = ''
+      can.height=can.height;
+      //开始绘画
+      Canvas.beginPath();
+      // 起始点
+      Canvas.moveTo(random(), random());
+      // 随机n跳三次贝塞尔曲线
+      for (var i = 0; i < random(); i++) {
+        Canvas.bezierCurveTo(
+          random(),
+          random(),
+          random(),
+          random(),
+          random(),
+          random()
+        );
+      }
+      // 定义验证码字体
+      Canvas.font = Option.font;
+      //验证码居中
+      Canvas.textAlign = Option.textAlign;
+      // 验证码颜色
+      Canvas.fillStyle = Option.fillStyle;
+      //验证码绘画入文本
+      Canvas.fillText(change(), Option.position.x, Option.position.y);
+      // 关闭绘画
+      Canvas.closePath();
+      // 曲线颜色
+      Canvas.strokeStyle = Option.strokeStyle;
+      Canvas.stroke();
+      callback && callback(res)
+    };
+    can.onclick();
+    }catch(err){
+      console.log(err)
+    }finally{
+      return {
+        Canvas:Canvas||null,
+        res:res||null
+      }
+    }
+    
+}
 export {
   randomNumb,
   localDB,
@@ -107,4 +201,5 @@ export {
   CamelCase,
   WAjax,
   staticData,
+  authCode
 };

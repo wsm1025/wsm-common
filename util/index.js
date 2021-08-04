@@ -1,6 +1,7 @@
 const isNum = (val) => !isNaN(val);//判断是否为数字 isNum(3)=> true
 const max = (a, b) => (a > b ? a - 0 : b - 0);
 const min = (a, b) => (a > b ? b - 0 : a - 0);
+const type = (key) => Object.prototype.toString.call(key)
 const Hexcolor = (color) => {
   var rgb = color.split(",");
   if(rgb.length !== 4){
@@ -12,4 +13,4 @@ const Hexcolor = (color) => {
   var hex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
   return hex;
 };
-export { isNum, max, min, Hexcolor };
+export { isNum, max, min, Hexcolor, type };
