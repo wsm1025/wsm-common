@@ -1,7 +1,5 @@
 import { isNum, max, min, Hexcolor, type } from "./util/index.js";
-import axios from "axios";
 
-const STATIC_DATA = "http://v1.hitokoto.cn?c=a";
 function randomNumb(a, b, c = 0) {
   try {
     var num = isNum(a) && isNum(b);
@@ -81,24 +79,6 @@ function CamelCase(str, separator = "-") {
   }
   return b.join("");
 }
-const WAjax = axios;
-WAjax.defaults.timeout = 5000;
-//静态数据
-function staticData(val = STATIC_DATA) {
-  return new Promise((success, fail) => {
-    axios(val)
-      .then((res) => {
-        success(res.data);
-      })
-      .catch((err) => fail(err));
-  })
-    .then((val) => {
-      return val;
-    })
-    .catch((err) => {
-      console.error("err:", err);
-    });
-}
 function authCode(option,callback) {
   let res = '';
   try{
@@ -121,7 +101,7 @@ function authCode(option,callback) {
       font:"40px 楷体"
     };
     const idNum = randomNumb(100, 1000);
-    if(type(option)!=="[object Object]") throw new Error('第一个参数为对象')
+    if(type(option)!=="[object Object]") Option = {};
     const Option = option && {...DefaultOption,...option};
     const canvas = document.createElement("canvas");
     canvas.height = Option.height;
@@ -199,7 +179,5 @@ export {
   Rgba,
   fromCamelCase,
   CamelCase,
-  WAjax,
-  staticData,
   authCode
 };
