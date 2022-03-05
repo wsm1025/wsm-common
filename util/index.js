@@ -1,7 +1,7 @@
 const isNum = (val) => !isNaN(val);//判断是否为数字 isNum(3)=> true
 const max = (a, b) => (a > b ? a - 0 : b - 0);
 const min = (a, b) => (a > b ? b - 0 : a - 0);
-const type = (key) => Object.prototype.toString.call(key)
+const type = (key) => Object.prototype.toString.call(key);
 const Hexcolor = (color) => {
   var rgb = color.split(",");
   if(rgb.length !== 4){
