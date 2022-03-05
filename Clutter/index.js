@@ -1,5 +1,5 @@
 // 杂乱
-import { isNum, max, min, Hexcolor, type } from "./util/index.js";
+import { isNum, max, min, Hexcolor, type } from "../util/index";
 function randomNumb(a, b, c = 0) {
   try {
     var num = isNum(a) && isNum(b);
@@ -175,7 +175,7 @@ function authCode(option = {}, callback) {
   }
 }
 
-export {
+export default {
   randomNumb,
   localDB,
   Rgba,

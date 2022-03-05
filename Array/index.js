@@ -12,4 +12,4 @@ function deleteArr(arr, ele) {
     let isBasicType = typeof (ele) === ('number' || 'string' || 'boolean' || 'undefined' || 'null');
     return arr.filter(element => isBasicType ? element !== ele : type(element) !== type(ele));
 }
-export { deleteArr }
+export default { deleteArr }
