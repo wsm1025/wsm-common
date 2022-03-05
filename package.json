@@ -1,6 +1,6 @@
 {
   "name": "wsm-common",
-  "version": "1.0.3-alpha",
+  "version": "1.0.4",
   "description": "This is WSM's public library",
   "main": "index.js",
   "type": "module",
